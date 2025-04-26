@@ -20,10 +20,16 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private PerfilRepository perfilRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public String addUsuario(UsuarioDTO usuarioDTO) {
+
+        personaRepository.save(usuarioDTO.getPersona());
 
         Usuario usuario = new Usuario(
                 usuarioDTO.getIdUsuario(),

@@ -6,12 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
-import com.stanreybackend.stanreyapi.entity.Perfil;
+import com.stanreybackend.stanreyapi.entity.Producto;
+import java.util.List;
+
 
 @EnableJpaRepositories
 @Repository
-public interface PerfilRepository extends JpaRepository<Perfil, Long>{
+public interface ProductoRepository extends JpaRepository<Producto, Long>{
  
-    Optional<Perfil> findByIdPerfil(Long idPerfil);
+    Optional<Producto> findByIdProducto(Long idProducto);
     
 }

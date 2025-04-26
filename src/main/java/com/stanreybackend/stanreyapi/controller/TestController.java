@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stanreybackend.stanreyapi.DTO.CategoriaDTO;
 import com.stanreybackend.stanreyapi.DTO.PerfilDTO;
+import com.stanreybackend.stanreyapi.DTO.ProductoDTO;
 import com.stanreybackend.stanreyapi.DTO.UsuarioDTO;
+import com.stanreybackend.stanreyapi.service.CategoriaService;
 import com.stanreybackend.stanreyapi.service.PerfilService;
+import com.stanreybackend.stanreyapi.service.ProductoService;
 import com.stanreybackend.stanreyapi.service.UsuarioService;
 
 @RestController
@@ -23,7 +27,10 @@ public class TestController {
     private UsuarioService usuarioService;
     @Autowired
     private PerfilService perfilService;
-
+    @Autowired
+    private CategoriaService categoriaService;
+    @Autowired
+    private ProductoService productoService;
 
     @PostMapping("/test/saveUsuario")
     public String saveUser(@RequestBody UsuarioDTO usuarioDTO) {
@@ -36,7 +43,20 @@ public class TestController {
         String id = perfilService.addPerfil(perfilDTO); 
         return id;
     }
+
+    @PostMapping("/test/saveCategoria")
+    public String saveCategoria(@RequestBody CategoriaDTO categoriaDTO) {
+        String id = categoriaService.addCategoria(categoriaDTO); 
+        return id;
+    }
     
+    @PostMapping("/test/saveProducto")
+    public String saveProducto(@RequestBody ProductoDTO productoDTO) {
+        String id = productoService.addProducto(productoDTO);
+        return id;
+    }
+    
+
     @GetMapping("/it_admin")
     @PreAuthorize("hasRole('IT_ADMIN')")
     public String adminAccess() {
