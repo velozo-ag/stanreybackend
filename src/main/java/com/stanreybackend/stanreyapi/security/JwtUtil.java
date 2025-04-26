@@ -1,4 +1,4 @@
-package com.hotelengine.hotelapi.security;
+package com.stanreybackend.stanreyapi.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

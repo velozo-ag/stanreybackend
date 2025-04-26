@@ -1,5 +1,7 @@
 package com.stanreybackend.stanreyapi.DTO;
 
+import com.stanreybackend.stanreyapi.entity.Persona;
+
 public class UsuarioDTO {
 
    private Long idUsuario;
@@ -11,18 +13,18 @@ public class UsuarioDTO {
 
     private Integer estado;
 
-    private Long dni;
+    private Persona persona;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(Long idUsuario, String usuario, String password, Long perfilId, Integer estado, Long dni) {
+    public UsuarioDTO(Long idUsuario, String usuario, String password, Long perfilId, Integer estado, Persona persona) {
         this.idUsuario = idUsuario;
         this.usuario = usuario;
         this.password = password;
         this.perfilId = perfilId;
         this.estado = estado;
-        this.dni = dni;
+        this.persona = persona;
     }
 
     public Long getIdUsuario() {
@@ -65,12 +67,12 @@ public class UsuarioDTO {
         this.estado = estado;
     }
 
-    public Long getDni() {
-        return dni;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setDni(Long dni) {
-        this.dni = dni;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
 }

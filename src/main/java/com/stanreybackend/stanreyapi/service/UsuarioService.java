@@ -14,18 +14,16 @@ import com.stanreybackend.stanreyapi.repository.PersonaRepository;
 import com.stanreybackend.stanreyapi.repository.UsuarioRepository;
 
 @Service
-public class UserService {
+public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
     private PerfilRepository perfilRepository;
     @Autowired
-    private PersonaRepository personaRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String addUser(UsuarioDTO usuarioDTO) {
+    public String addUsuario(UsuarioDTO usuarioDTO) {
 
         Usuario usuario = new Usuario(
                 usuarioDTO.getIdUsuario(),
@@ -33,7 +31,7 @@ public class UserService {
                 passwordEncoder.encode(usuarioDTO.getPassword()),
                 perfilRepository.findByIdPerfil(usuarioDTO.getPerfilId()).orElse(null),
                 usuarioDTO.getEstado(),
-                personaRepository.findByDni(usuarioDTO.getDni()).orElse(null));
+                usuarioDTO.getPersona());
 
         usuarioRepository.save(usuario);
 
