@@ -23,39 +23,38 @@ import com.stanreybackend.stanreyapi.service.UsuarioService;
 @RequestMapping("/stanrey")
 public class TestController {
 
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private PerfilService perfilService;
-    @Autowired
-    private CategoriaService categoriaService;
-    @Autowired
-    private ProductoService productoService;
+    // @Autowired
+    // private UsuarioService usuarioService;
+    // @Autowired
+    // private PerfilService perfilService;
+    // @Autowired
+    // private CategoriaService categoriaService;
+    // @Autowired
+    // private ProductoService productoService;
 
-    @PostMapping("/test/saveUsuario")
-    public String saveUser(@RequestBody UsuarioDTO usuarioDTO) {
-        String id = usuarioService.addUsuario(usuarioDTO); 
-        return id;
-    }
+    // @PostMapping("/test/saveUsuario")
+    // public String saveUser(@RequestBody UsuarioDTO usuarioDTO) {
+    //     String id = usuarioService.addUsuario(usuarioDTO); 
+    //     return id;
+    // }
 
-    @PostMapping("/test/savePerfil")
-    public String savePerfil(@RequestBody PerfilDTO perfilDTO) {
-        String id = perfilService.addPerfil(perfilDTO); 
-        return id;
-    }
+    // @PostMapping("/test/savePerfil")
+    // public String savePerfil(@RequestBody PerfilDTO perfilDTO) {
+    //     String id = perfilService.addPerfil(perfilDTO); 
+    //     return id;
+    // }
 
-    @PostMapping("/test/saveCategoria")
-    public String saveCategoria(@RequestBody CategoriaDTO categoriaDTO) {
-        String id = categoriaService.addCategoria(categoriaDTO); 
-        return id;
-    }
+    // @PostMapping("/test/saveCategoria")
+    // public String saveCategoria(@RequestBody CategoriaDTO categoriaDTO) {
+    //     String id = categoriaService.addCategoria(categoriaDTO); 
+    //     return id;
+    // }
     
-    @PostMapping("/test/saveProducto")
-    public String saveProducto(@RequestBody ProductoDTO productoDTO) {
-        String id = productoService.addProducto(productoDTO);
-        return id;
-    }
-    
+    // @PostMapping("/test/saveProducto")
+    // public String saveProducto(@RequestBody ProductoDTO productoDTO) {
+    //     String id = productoService.addProducto(productoDTO);
+    //     return id;
+    // }
 
     @GetMapping("/it_admin")
     @PreAuthorize("hasRole('IT_ADMIN')")

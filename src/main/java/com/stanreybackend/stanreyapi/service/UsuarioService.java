@@ -23,7 +23,7 @@ public class UsuarioService {
 
     @Autowired
     private PersonaRepository personaRepository;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -43,6 +43,54 @@ public class UsuarioService {
 
         return usuario.getIdUsuario().toString();
     };
+
+    public Usuario findByIdUsuario(Long id_usuario) {
+        return usuarioRepository.findByIdUsuario(id_usuario).orElse(null);
+    }
+
+    public Usuario findByUsuario(String usuario) {
+        return usuarioRepository.findByUsuario(usuario).orElse(null);
+    }
+
+    public Long bajaByIdUsuario(Long id_usuario) {
+        Usuario usuario = findByIdUsuario(id_usuario);
+        if (usuario.getEstado() == 1) {
+            usuario.setEstado(0);
+            usuarioRepository.save(usuario);
+        }
+
+        return usuario.getIdUsuario();
+    }
+
+    public Long bajaByUsuario(String username) {
+        Usuario usuario = findByUsuario(username);
+        if (usuario.getEstado() == 1) {
+            usuario.setEstado(0);
+            usuarioRepository.save(usuario);
+        }
+
+        return usuario.getIdUsuario();
+    }
+
+    public Long altaByIdUsuario(Long id_usuario) {
+        Usuario usuario = findByIdUsuario(id_usuario);
+        if (usuario.getEstado() == 0) {
+            usuario.setEstado(1);
+            usuarioRepository.save(usuario);
+        }
+
+        return usuario.getIdUsuario();
+    }
+
+    public Long altaByUsuario(String username) {
+        Usuario usuario = findByUsuario(username);
+        if (usuario.getEstado() == 0) {
+            usuario.setEstado(1);
+            usuarioRepository.save(usuario);
+        }
+
+        return usuario.getIdUsuario();
+    }
 
     public List<Usuario> findAll() {
 
