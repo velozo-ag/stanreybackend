@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import com.stanreybackend.stanreyapi.DTO.UsuarioDTO;
+import com.stanreybackend.stanreyapi.entity.Usuario;
 import com.stanreybackend.stanreyapi.repository.UsuarioRepository;
 import com.stanreybackend.stanreyapi.security.JwtUtil;
 import com.stanreybackend.stanreyapi.service.UsuarioService;
@@ -36,21 +37,22 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@RequestBody UsuarioDTO usuario) {
+    public ResponseEntity<?> authenticateUser(@RequestBody UsuarioDTO usuarioDTO) {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(usuario.getUsuario(), usuario.getPassword()));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getUsuario());
+                    new UsernamePasswordAuthenticationToken(usuarioDTO.getUsuario(), usuarioDTO.getPassword()));
+
+            UserDetails userDetails = userDetailsService.loadUserByUsername(usuarioDTO.getUsuario());
             String token = jwtUtil.generateToken(userDetails.getUsername());
 
-            String role = userDetails.getAuthorities().stream()
-                    .map(authority -> authority.getAuthority().replace("ROLE_", ""))
-                    .findFirst()
-                    .orElse("UNKNOWN");
-
+            Usuario usuario = usuarioService.findByUsuario(usuarioDTO.getUsuario());
+            if (usuario == null) {
+                return ResponseEntity.status(404).body(Map.of("error", "Usuario no encontrado"));
+            }
             return ResponseEntity.ok(Map.of(
                     "token", token,
-                    "role", role));
+                    "usuario", new UsuarioDTO(usuario.getIdUsuario(), usuario.getUsuario(), null,
+                            usuario.getPerfil().getIdPerfil(), usuario.getEstado(), usuario.getPersona())));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(401).body(Map.of("error", "Credenciales inválidas"));
         } catch (Exception e) {
@@ -65,5 +67,22 @@ public class AuthController {
         }
         usuarioService.addUsuario(usuario);
         return ResponseEntity.ok(Map.of("message", "Usuario registrado: " + usuario.getUsuario()));
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<?> verifyToken(@RequestHeader("Authorization") String token) {
+        try {
+            if (token == null || !token.startsWith("Bearer ")) {
+                return ResponseEntity.status(401).body(Map.of("error", "Token inválido"));
+            }
+            String jwt = token.replace("Bearer ", "");
+            String username = jwtUtil.extractUsername(jwt);
+            if (username == null || !jwtUtil.validateToken(jwt, username)) {
+                return ResponseEntity.status(401).body(Map.of("error", "Token inválido"));
+            }
+            return ResponseEntity.ok(Map.of("message", "Token válido"));
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(Map.of("error", "Token inválido"));
+        }
     }
 }
