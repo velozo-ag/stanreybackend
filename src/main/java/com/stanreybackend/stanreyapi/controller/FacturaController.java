@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.stanreybackend.stanreyapi.DTO.FacturaDTO;
 import com.stanreybackend.stanreyapi.DTO.DetalleFacturaDTO;
 import com.stanreybackend.stanreyapi.entity.DetalleFactura;
 import com.stanreybackend.stanreyapi.entity.Factura;
+import com.stanreybackend.stanreyapi.service.CarritoProductoService;
 import com.stanreybackend.stanreyapi.service.DetalleFacturaService;
 import com.stanreybackend.stanreyapi.service.FacturaService;
 
@@ -31,13 +33,25 @@ public class FacturaController {
     @Autowired
     private DetalleFacturaService detalleFacturaService;
 
+    @Autowired
+    private CarritoProductoService carritoProductoService;
+
+    @Transactional
     @PostMapping("/factura/finalizar-compra")
-    public ResponseEntity<String> finalizarCompra(@RequestBody FacturaDTO facturaDTO, @RequestBody List<DetalleFacturaDTO> detallesDTO) {
+    public ResponseEntity<String> finalizarCompra(@RequestBody FacturaRequest facturaRequest) {
+        FacturaDTO facturaDTO = facturaRequest.getFacturaDTO();
+        List<DetalleFacturaDTO> detallesDTO = facturaRequest.getDetallesDTO();
+
         String facturaId = facturaService.addFactura(facturaDTO);
 
         for (DetalleFacturaDTO detalleDTO : detallesDTO) {
             detalleDTO.setFacturaId(Long.valueOf(facturaId));
             detalleFacturaService.addDetalleFactura(detalleDTO);
+        }
+
+        Long carritoId = facturaDTO.getCarritoId(); 
+        if (carritoId != null) {
+            carritoProductoService.deleteAllByCarritoId(carritoId);
         }
 
         return ResponseEntity.ok(facturaId);

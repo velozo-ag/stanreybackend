@@ -16,6 +16,7 @@ public class FacturaDTO {
     private String estado;
 
     private Long usuarioId;
+    private Long carritoId;
 
     private List<Long> detalleIds;
 
@@ -23,13 +24,14 @@ public class FacturaDTO {
     }
 
     public FacturaDTO(Long idFactura, LocalDateTime fecha, Double importeTotal, String formaPago, String estado,
-                     Long usuarioId, List<Long> detalleIds) {
+                     Long usuarioId, Long carritoId, List<Long> detalleIds) {
         this.idFactura = idFactura;
         this.fecha = fecha;
         this.importeTotal = importeTotal;
         this.formaPago = formaPago;
         this.estado = estado;
         this.usuarioId = usuarioId;
+        this.carritoId = carritoId;
         this.detalleIds = detalleIds;
     }
 
@@ -79,6 +81,14 @@ public class FacturaDTO {
 
     public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
+    }
+
+    public Long getCarritoId() {
+        return carritoId;
+    }
+
+    public void setCarritoId(Long carritoId) {
+        this.carritoId = carritoId;
     }
 
     public List<Long> getDetalleIds() {

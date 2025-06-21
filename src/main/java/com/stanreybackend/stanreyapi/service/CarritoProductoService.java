@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stanreybackend.stanreyapi.DTO.CarritoProductoDTO;
 import com.stanreybackend.stanreyapi.entity.CarritoProducto;
@@ -60,7 +61,13 @@ public class CarritoProductoService {
         return null;
     }
 
-    public List<CarritoProducto> findAll() {
-        return carritoProductoRepository.findAll();
+    @Transactional
+    public void deleteCarritoProducto(Long idCarritoProducto) {
+        carritoProductoRepository.deleteById(idCarritoProducto);
+    }
+
+    @Transactional
+    public void deleteAllByCarritoId(Long carritoId) {
+        carritoProductoRepository.deleteByCarritoIdCarrito(carritoId);
     }
 }
