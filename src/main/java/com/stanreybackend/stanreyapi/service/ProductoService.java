@@ -68,7 +68,7 @@ public class ProductoService {
         producto.setDescripcion(productoDTO.getDescripcion());
         producto.setPrecio(productoDTO.getPrecio());
         producto.setStock(productoDTO.getStock());
-        // producto.setUrlImagen(productoDTO.getUrlImagen());
+        producto.setUrlImagen(productoDTO.getUrlImagen());
         producto.setColor(productoDTO.getColor());
         producto.setCategoria(categoriaRepository.findByIdCategoria(productoDTO.getCategoriaId()).orElse(null));
 

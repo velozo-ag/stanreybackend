@@ -37,6 +37,4 @@ public class Persona {
     private String email;
     @Column(nullable = false)
     private Integer telefono;
-
-    // private Direccion direccion;
 }

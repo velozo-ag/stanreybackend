@@ -58,6 +58,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/stanrey/auth/**").permitAll()
                         .requestMatchers("/stanrey/test/**").permitAll()
+                        .requestMatchers("/stanrey/categoria/**").permitAll()
                         .requestMatchers("/stanrey/producto/**").permitAll()
                         .requestMatchers("/stanrey/cliente/**").hasRole("CLIENT")
                         .requestMatchers("/stanrey/it_admin/**").hasRole("IT_ADMIN")

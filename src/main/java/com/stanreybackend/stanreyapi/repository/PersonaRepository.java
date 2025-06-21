@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 import com.stanreybackend.stanreyapi.entity.Persona;
-import java.util.List;
-
 
 @EnableJpaRepositories
 @Repository
