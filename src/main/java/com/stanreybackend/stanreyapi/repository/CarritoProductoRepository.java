@@ -14,9 +14,12 @@ import com.stanreybackend.stanreyapi.entity.CarritoProducto;
 public interface CarritoProductoRepository extends JpaRepository<CarritoProducto, Long> {
 
     Optional<CarritoProducto> findByIdCarritoProducto(Long idCarritoProducto);
+
     List<CarritoProducto> findByCarritoIdCarrito(Long carritoId);
 
-    @Modifying
-    @Query("DELETE FROM CarritoProducto cp WHERE cp.carrito.idCarrito = :carritoId")
-    void deleteByCarritoIdCarrito(Long carritoId);
+    Optional<CarritoProducto> findByCarritoIdCarritoAndProductoIdProducto(Long carritoId, Long productoId);
+
+    void deleteByIdCarritoProducto(Long idCarritoProducto);
+
+    void deleteAllByCarritoIdCarrito(Long carritoId);
 }

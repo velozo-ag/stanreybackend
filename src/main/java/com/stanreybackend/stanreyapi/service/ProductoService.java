@@ -21,16 +21,15 @@ public class ProductoService {
     public String addProducto(ProductoDTO productoDTO) {
 
         Producto producto = new Producto(
-            productoDTO.getIdProducto(),
-            productoDTO.getNombre(),
-            productoDTO.getDescripcion(),
-            productoDTO.getPrecio(),
-            productoDTO.getStock(),
-            productoDTO.getUrlImagen(),
-            productoDTO.getColor(),
-            productoDTO.getEstado(),
-            categoriaRepository.findByIdCategoria(productoDTO.getCategoriaId()).orElse(null)
-        );
+                productoDTO.getIdProducto(),
+                productoDTO.getNombre(),
+                productoDTO.getDescripcion(),
+                productoDTO.getPrecio(),
+                productoDTO.getStock(),
+                productoDTO.getUrlImagen(),
+                productoDTO.getColor(),
+                productoDTO.getEstado(),
+                categoriaRepository.findByIdCategoria(productoDTO.getCategoriaId()).orElse(null));
 
         productoRepository.save(producto);
 
@@ -62,7 +61,7 @@ public class ProductoService {
         return producto.getIdProducto().toString();
     }
 
-    public String updateProducto(Long id_producto, ProductoDTO productoDTO){
+    public String updateProducto(Long id_producto, ProductoDTO productoDTO) {
         Producto producto = productoRepository.findByIdProducto(id_producto).orElse(null);
         producto.setNombre(productoDTO.getNombre());
         producto.setDescripcion(productoDTO.getDescripcion());
@@ -79,5 +78,13 @@ public class ProductoService {
     public List<Producto> findAll() {
         List<Producto> productos = productoRepository.findAll();
         return productos;
+    }
+
+    public void updateStock(Long idProducto, Integer newStock) {
+        Producto producto = findByIdProducto(idProducto);
+        if (producto != null) {
+            producto.setStock(newStock);
+            productoRepository.save(producto);
+        }
     }
 }

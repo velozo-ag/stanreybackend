@@ -60,6 +60,7 @@ public class SecurityConfig {
                         .requestMatchers("/stanrey/test/**").permitAll()
                         .requestMatchers("/stanrey/categoria/**").permitAll()
                         .requestMatchers("/stanrey/producto/**").permitAll()
+                        .requestMatchers("/stanrey/carrito/**").authenticated()
                         .requestMatchers("/stanrey/cliente/**").hasRole("CLIENT")
                         .requestMatchers("/stanrey/it_admin/**").hasRole("IT_ADMIN")
                         .requestMatchers("/stanrey/manager/**").hasRole("MANAGER")

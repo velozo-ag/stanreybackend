@@ -1,5 +1,7 @@
 package com.stanreybackend.stanreyapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,5 +30,6 @@ public class DetalleFactura {
 
     @ManyToOne
     @JoinColumn(name = "factura_id", nullable = false, referencedColumnName = "id_factura")
+    @JsonBackReference
     private Factura factura;
 }
