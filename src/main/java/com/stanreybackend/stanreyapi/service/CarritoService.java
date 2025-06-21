@@ -37,7 +37,7 @@ public class CarritoService {
     }
 
     public Carrito findByUsuarioId(Long usuarioId) {
-        return carritoRepository.findByUsuarioId(usuarioId).orElse(null);
+        return carritoRepository.findByUsuarioIdUsuario(usuarioId).orElse(null);
     }
 
     public String bajaByIdCarrito(Long idCarrito) {

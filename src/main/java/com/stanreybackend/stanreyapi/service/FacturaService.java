@@ -40,7 +40,7 @@ public class FacturaService {
     }
 
     public List<Factura> findByUsuarioId(Long usuarioId) {
-        return facturaRepository.findByUsuarioId(usuarioId);
+        return facturaRepository.findByUsuarioIdUsuario(usuarioId);
     }
 
     public String bajaByIdFactura(Long idFactura) {

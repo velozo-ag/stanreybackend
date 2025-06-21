@@ -11,5 +11,5 @@ import com.stanreybackend.stanreyapi.entity.Carrito;
 public interface CarritoRepository extends JpaRepository<Carrito, Long> {
 
     Optional<Carrito> findByIdCarrito(Long idCarrito);
-    Optional<Carrito> findByUsuarioId(Long usuarioId);
+    Optional<Carrito> findByUsuarioIdUsuario(Long usuarioId);
 }

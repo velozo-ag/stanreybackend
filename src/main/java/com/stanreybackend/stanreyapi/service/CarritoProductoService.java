@@ -43,7 +43,7 @@ public class CarritoProductoService {
     }
 
     public List<CarritoProducto> findByCarritoId(Long carritoId) {
-        return carritoProductoRepository.findByCarritoId(carritoId);
+        return carritoProductoRepository.findByCarritoIdCarrito(carritoId);
     }
 
     public String updateCarritoProducto(Long idCarritoProducto, CarritoProductoDTO carritoProductoDTO) {

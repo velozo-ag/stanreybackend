@@ -42,7 +42,7 @@ public class DetalleFacturaService {
     }
 
     public List<DetalleFactura> findByFacturaId(Long facturaId) {
-        return detalleFacturaRepository.findByFacturaId(facturaId);
+        return detalleFacturaRepository.findByFacturaIdFactura(facturaId);
     }
 
     public List<DetalleFactura> findAll() {

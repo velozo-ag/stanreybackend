@@ -12,5 +12,5 @@ import com.stanreybackend.stanreyapi.entity.DetalleFactura;
 public interface DetalleFacturaRepository extends JpaRepository<DetalleFactura, Long> {
 
     Optional<DetalleFactura> findByIdDetalleFactura(Long idDetalleFactura);
-    List<DetalleFactura> findByFacturaId(Long facturaId);
+    List<DetalleFactura> findByFacturaIdFactura(Long facturaId);
 }
