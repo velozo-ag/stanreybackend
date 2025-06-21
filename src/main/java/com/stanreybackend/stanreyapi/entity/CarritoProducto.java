@@ -38,7 +38,7 @@ public class CarritoProducto {
     @Column(nullable = false, name = "precio_unitario")
     private Double precioUnitario;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "carrito_id", referencedColumnName = "id_carrito", nullable = false)
     private Carrito carrito;
     
